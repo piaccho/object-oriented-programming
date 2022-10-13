@@ -1,6 +1,5 @@
 package agh.ics.oop;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import static java.lang.System.out;
 
@@ -11,9 +10,9 @@ public class World {
         run(convert(args));
         out.println("Stop");
 
-        Vector2d position1 = new Vector2d(1,2);
+        Vector2d position1 = new Vector2d(1, 2);
         System.out.println(position1);
-        Vector2d position2 = new Vector2d(-2,1);
+        Vector2d position2 = new Vector2d(-2, 1);
         System.out.println(position2);
         System.out.println(position1.add(position2));
 
@@ -28,27 +27,27 @@ public class World {
     }
 
     public static void run(Direction[] dirs) {
-        for(Direction d: dirs) {
+        for (Direction d : dirs) {
             String ans = switch (d) {
                 case FORWARD -> "Zwierzak idzie do przodu";
                 case BACKWARD -> "Zwierzak idzie do tyłu";
                 case RIGHT -> "Zwierzak skręca w prawo";
-                case LEFT  -> "Zwierzak skręca w lewo";
+                case LEFT -> "Zwierzak skręca w lewo";
             };
             out.println(ans);
         }
     }
 
-    public static Direction[] convert(String[] array){
+    public static Direction[] convert(String[] array) {
         int counter = 0;
-        for(String s: array) {
-            if(s.equals("f") || s.equals("b") || s.equals("r") || s.equals("l")){
+        for (String s : array) {
+            if (s.equals("f") || s.equals("b") || s.equals("r") || s.equals("l")) {
                 counter++;
             }
         }
         Direction[] dirs = new Direction[counter];
         counter = 0;
-        for(String s: array) {
+        for (String s : array) {
             switch (s) {
                 case "f":
                     dirs[counter] = Direction.FORWARD;
@@ -68,7 +67,8 @@ public class World {
                     break;
                 default:
                     break;
-            };
+            }
+
         }
         return dirs;
     }
