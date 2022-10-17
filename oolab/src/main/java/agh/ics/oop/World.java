@@ -6,26 +6,32 @@ import static java.lang.System.out;
 public class World {
 
     public static void main(String[] args) {
-        out.println("Start");
-        run(convert(args));
-        out.println("Stop");
+//        out.println("Start");
+//        run(convert(args));
+//        out.println("Stop");
+//
+//        Vector2d position1 = new Vector2d(1, 2);
+//        System.out.println(position1);
+//        Vector2d position2 = new Vector2d(-2, 1);
+//        System.out.println(position2);
+//        System.out.println(position1.add(position2));
 
-        Vector2d position1 = new Vector2d(1, 2);
-        System.out.println(position1);
-        Vector2d position2 = new Vector2d(-2, 1);
-        System.out.println(position2);
-        System.out.println(position1.add(position2));
+        animalTest(args);
 
-        out.println(MapDirection.NORTH.toString());
-        out.println(MapDirection.SOUTH.toString());
-        out.println(MapDirection.EAST.toString());
-        out.println(MapDirection.WEST.toString());
+        // aby wykluczyć pojawienie się dwóch zwierząt w jednym miejscu można zaimplementować klase Map która posiada dla każdych koordynatów wartość boolean, która będzie oznaczać czy dane pole jest zajęte
 
-        out.println(MapDirection.NORTH.previous().toString());
-        out.println(MapDirection.SOUTH.toUnitVector().toString());
 
     }
+    public static void animalTest(String[] array) {
+        Animal pies = new Animal();
+        out.println(pies.toString());
 
+        OptionsParser p = new OptionsParser();
+        for (MoveDirection m: p.parse(array)) {
+            pies.move(m);
+            out.println(pies.toString());
+        }
+    }
     public static void run(Direction[] dirs) {
         for (Direction d : dirs) {
             String ans = switch (d) {
