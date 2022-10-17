@@ -13,6 +13,10 @@ public class Animal {
         return this.position.equals(position);
     }
 
+    public boolean isTurnedTo(MapDirection direction) {
+        return this.orientation.equals(direction);
+    }
+
     public void move(MoveDirection direction) {
         Vector2d moveAnimal = new Vector2d(0, 0);
         switch (direction) {

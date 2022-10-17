@@ -16,13 +16,14 @@ public class World {
 //        System.out.println(position2);
 //        System.out.println(position1.add(position2));
 
-        animalTest(args);
+        out.println(animalTest(args));
+
 
         // aby wykluczyć pojawienie się dwóch zwierząt w jednym miejscu można zaimplementować klase Map która posiada dla każdych koordynatów wartość boolean, która będzie oznaczać czy dane pole jest zajęte
 
 
     }
-    public static void animalTest(String[] array) {
+    public static boolean animalTest(String[] array) {
         Animal pies = new Animal();
         out.println(pies.toString());
 
@@ -31,6 +32,7 @@ public class World {
             pies.move(m);
             out.println(pies.toString());
         }
+        return (pies.isAt(new Vector2d(3, 3)) && pies.isTurnedTo(MapDirection.SOUTH));
     }
     public static void run(Direction[] dirs) {
         for (Direction d : dirs) {
