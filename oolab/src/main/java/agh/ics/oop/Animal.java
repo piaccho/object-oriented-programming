@@ -2,11 +2,28 @@ package agh.ics.oop;
 
 
 public class Animal {
+
     private MapDirection orientation = MapDirection.NORTH;
     private Vector2d position = new Vector2d(2, 2);
 
+    public Animal (agh.ics.oop.IWorldMap map){
+
+
+    }
+
+    public Animal (agh.ics.oop.IWorldMap map, Vector2d initialPosition){
+
+        position = initialPosition;
+    }
+
     public String toString() {
-        return "position: " + "(" + String.valueOf(this.position.x) + "," + String.valueOf(this.position.y) + ")" + " orientation: " + String.valueOf(orientation);
+        String orient = switch (this.orientation) {
+            case NORTH -> "N";
+            case EAST -> "E";
+            case SOUTH -> "S";
+            case WEST -> "W";
+        };
+        return "position: " + "(" + String.valueOf(this.position.x) + "," + String.valueOf(this.position.y) + ")" + " orientation: " + orient;
     }
 
     public boolean isAt(Vector2d position) {
