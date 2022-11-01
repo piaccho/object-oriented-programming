@@ -11,10 +11,10 @@ public class Vector2d {
         return "(" + String.valueOf(this.x) + "," + String.valueOf(this.y) + ")";
     }
     public boolean precedes(Vector2d other){
-        return (this.x <= other.x && this.y <= other.y);
+        return (this.x >= other.x && this.y >= other.y);
     }
     public boolean follows(Vector2d other){
-        return (this.x >= other.x && this.y >= other.y);
+        return (this.x <= other.x && this.y <= other.y);
     }
     public Vector2d upperRight(Vector2d other){
         return new Vector2d(Math.max(this.x, other.x), Math.max(this.y, other.y));
@@ -37,6 +37,6 @@ public class Vector2d {
         return (this.x == that.x && this.y == that.y);
     }
     public Vector2d opposite(){
-        return new Vector2d(this.y, this.x);
+        return new Vector2d(-this.x, -this.y);
     }
 }
