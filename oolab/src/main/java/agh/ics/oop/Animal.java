@@ -1,7 +1,6 @@
 package agh.ics.oop;
 
 
-<<<<<<< HEAD
 public class Animal extends AbstractWorldMapElement{
     private MapDirection direction = MapDirection.NORTH;
     private IWorldMap map;
@@ -9,24 +8,6 @@ public class Animal extends AbstractWorldMapElement{
     public Animal (IWorldMap map, Vector2d initialPosition){
         super(initialPosition);
         this.map = map;
-=======
-public class Animal {
-    private MapDirection direction = MapDirection.NORTH;
-    private Vector2d position;
-    private IWorldMap map;
-
-    public Animal () {
-        this.position = new Vector2d(2, 2);
-    }
-
-    public Animal (agh.ics.oop.IWorldMap map){
-        this.map = map;
-    }
-
-    public Animal (agh.ics.oop.IWorldMap map, Vector2d initialPosition){
-        this.map = map;
-        this.position = initialPosition;
->>>>>>> 01f523e0798ec096e21babf692a538a70cd8747e
     }
 
     public String toString() {
@@ -38,22 +19,8 @@ public class Animal {
         };
     }
 
-<<<<<<< HEAD
     public MapDirection getDirection() {
         return this.direction;
-=======
-    public Vector2d getPosition() {
-        return this.position;
-    }
-
-    public MapDirection getDirection() {
-        return this.direction;
-    }
-
-
-    public boolean isAt(Vector2d position) {
-        return this.position.equals(position);
->>>>>>> 01f523e0798ec096e21babf692a538a70cd8747e
     }
 
     public boolean isTurnedTo(MapDirection direction) {
