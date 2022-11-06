@@ -6,34 +6,15 @@ import static java.lang.System.out;
 public class World {
 
     public static void main(String[] args) {
-//        out.println("Start");
-//        run(convert(args));
-//        out.println("Stop");
-//
-//        Vector2d position1 = new Vector2d(1, 2);
-//        System.out.println(position1);
-//        Vector2d position2 = new Vector2d(-2, 1);
-//        System.out.println(position2);
-//        System.out.println(position1.add(position2));
-
-        out.println(animalTest(args));
-
-
-        // aby wykluczyć pojawienie się dwóch zwierząt w jednym miejscu można zaimplementować klase Map która posiada dla każdych koordynatów wartość boolean, która będzie oznaczać czy dane pole jest zajęte
-
+        MoveDirection[] directions = new OptionsParser().parse(args);
+        GrassField map = new GrassField(10);
+        Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
+        IEngine engine = new SimulationEngine(directions, map, positions);
+        engine.run();
+        out.println(map.toString());
 
     }
-    public static boolean animalTest(String[] array) {
-        Animal pies = new Animal();
-        out.println(pies.toString());
 
-        OptionsParser p = new OptionsParser();
-        for (MoveDirection m: p.parse(array)) {
-            pies.move(m);
-            out.println(pies.toString());
-        }
-        return (pies.isAt(new Vector2d(3, 3)) && pies.isTurnedTo(MapDirection.SOUTH));
-    }
     public static void run(Direction[] dirs) {
         for (Direction d : dirs) {
             String ans = switch (d) {

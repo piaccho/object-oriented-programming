@@ -1,39 +1,20 @@
 package agh.ics.oop;
 
-public class RectangularMap implements agh.ics.oop.IWorldMap {
-    private int width;
-    private int height;
+import java.util.ArrayList;
+import java.util.List;
 
+public class RectangularMap extends AbstractWorldMap  {
     public RectangularMap(int width, int height) {
-        this.width = width;
-        this.height = height;
 
+        super(width - 1, height - 1, 0, 0);
     }
 
-    @Override
-    public boolean canMoveTo(Vector2d position) {
-        return false;
+    public Vector2d drawBottomLeft() {
+        return leftBottomCorner;
     }
 
-    @Override
-    public boolean place(Animal animal) {
-        return false;
+    public Vector2d drawTopRight() {
+        return rightTopCorner;
     }
 
-    @Override
-    public boolean isOccupied(Vector2d position) {
-        return false;
-    }
-
-    @Override
-    public Object objectAt(Vector2d position) {
-        return null;
-    }
-
-
-    public String toString() {
-        agh.ics.oop.MapVisualizer vis = new agh.ics.oop.MapVisualizer(map);
-        return vis.draw(new Vector2d(0, 0), new Vector2d(width, height));
-
-    }
 }
