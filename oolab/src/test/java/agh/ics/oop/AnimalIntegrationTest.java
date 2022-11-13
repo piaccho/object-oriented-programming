@@ -16,6 +16,7 @@ public class AnimalIntegrationTest {
         SimulationEngine engine = new SimulationEngine(directions, map, positions);
         engine.run();
 
+
         System.out.println(map.toString());
 
         Vector2d[] expected = new Vector2d[]{

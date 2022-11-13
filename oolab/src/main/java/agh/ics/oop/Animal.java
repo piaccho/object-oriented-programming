@@ -1,9 +1,12 @@
 package agh.ics.oop;
 
+import java.util.HashMap;
+import java.util.Map;
 
 public class Animal extends AbstractWorldMapElement{
     private MapDirection direction = MapDirection.NORTH;
     private IWorldMap map;
+    protected Map<IPositionChangeObserver, IPositionChangeObserver> observers = new HashMap<>();
 
     public Animal (IWorldMap map, Vector2d initialPosition){
         super(initialPosition);
@@ -48,4 +51,19 @@ public class Animal extends AbstractWorldMapElement{
                 break;
         }
     }
+
+    void addObserver(IPositionChangeObserver observer) {this.observers.put(observer, observer);
+    };
+
+    void removeObserver(IPositionChangeObserver observer) {this.observers.remove(observer);
+    };
+
+    void positionChanged(Vector2d newPosition) {
+        for (IPositionChangeObserver observer: observers.values()) {
+            observer.positionChanged(this.position, newPosition);
+        }
+        this.position = newPosition;
+    }
+
+
 }
