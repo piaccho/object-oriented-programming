@@ -8,6 +8,7 @@ public class OptionsParser {
                 counter++;
             }
         }
+
         MoveDirection[] moveArray = new MoveDirection[counter];
         int index = 0;
         for (String s: array) {
@@ -16,12 +17,10 @@ public class OptionsParser {
                  case "b", "backward" -> MoveDirection.BACKWARD;
                  case "r", "right" -> MoveDirection.RIGHT;
                  case "l", "left" -> MoveDirection.LEFT;
-                 default -> null;
+                 default -> throw new IllegalArgumentException(s + " is not legal move specification");
              };
-             if (add != null) {
-                 moveArray[index] = add;
-                 index++;
-             }
+             moveArray[index] = add;
+             index += 1;
         }
         return moveArray;
     }

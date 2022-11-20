@@ -18,11 +18,21 @@ public class GrassFieldTest {
         GrassField map = new GrassField(10);
         Assertions.assertTrue(map.place(new Animal(map, new Vector2d(-10, -10))));
         // cant place at map border
-        Assertions.assertFalse(map.place(new Animal(map, new Vector2d(Integer.MAX_VALUE, Integer.MAX_VALUE))));
+        try{
+            map.place(new Animal(map, new Vector2d(Integer.MAX_VALUE, Integer.MAX_VALUE)));
+            Assertions.fail("Can't place at borders");
+        }catch(IllegalArgumentException ex){
+            Assertions.assertTrue(true);
+        }
 
         // cant place if position is taken
         Assertions.assertTrue(map.place(new Animal(map, new Vector2d(5, 5))));
-        Assertions.assertFalse(map.place(new Animal(map, new Vector2d(5, 5))));
+        try{
+            map.place(new Animal(map, new Vector2d(5, 5)));
+            Assertions.fail("Can't place on (5, 5) if it's taken");
+        }catch(IllegalArgumentException ex){
+            Assertions.assertTrue(true);
+        }
     }
 
     @Test
@@ -42,7 +52,6 @@ public class GrassFieldTest {
     @Test
     public void spawnGrassTest() {
         GrassField map = new GrassField(0);
-        Assertions.assertTrue(map.spawnGrassAt(new Vector2d(4, 3)));
         Assertions.assertTrue(map.objectAt(new Vector2d(4, 3)) instanceof Grass);
     }
 

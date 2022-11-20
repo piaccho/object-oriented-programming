@@ -3,6 +3,8 @@ package agh.ics.oop;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static java.lang.System.out;
+
 public class GrassField extends AbstractWorldMap{
     private int grassNumber;
     private final int maxRange;
@@ -10,6 +12,11 @@ public class GrassField extends AbstractWorldMap{
 
     private ArrayList<Grass> grasses;
 
+    private MapBoundary mapBoundary;
+
+    public ArrayList<Grass> getGrasses() {
+        return grasses;
+    }
 
     public GrassField(int grassNumber) {
         super(Integer.MIN_VALUE + 1, Integer.MIN_VALUE + 1, Integer.MAX_VALUE - 1, Integer.MAX_VALUE - 1);
@@ -36,9 +43,19 @@ public class GrassField extends AbstractWorldMap{
         return spawnGrassAt(randomPosition);
     }
 
+//    public void spawnGrassAt(Vector2d position) {
+//        try {
+//            if (objectAt(position) == null) throw new IllegalArgumentException("Object can't be placed at " + position.toString() + " position");
+//            Grass grassToAdd = new Grass(position);
+//            grasses.add(grassToAdd);
+//        } catch(IllegalArgumentException exception) {
+//            out.println("Exception:" + exception);
+//        }
+//    }
     public boolean spawnGrassAt(Vector2d position) {
         if (objectAt(position) == null) {
-            grasses.add(new Grass(position));
+            Grass grassToAdd = new Grass(position);
+            grasses.add(grassToAdd);
             return true;
         }
         return false;
@@ -57,12 +74,6 @@ public class GrassField extends AbstractWorldMap{
 
     public Vector2d drawTopRight() {
         Vector2d drawRT = leftBottomCorner;
-//        for (Animal animal : animals) {
-//            drawRT = drawRT.upperRight(animal.getPosition());
-//        }
-//        animals.forEach((pos, animal) -> {
-//            drawRT = drawRT.lowerLeft(pos);
-//        });
         for (Animal animal: animals.values()) {
             drawRT = drawRT.upperRight(animal.getPosition());
         }

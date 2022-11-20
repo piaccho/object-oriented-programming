@@ -16,6 +16,16 @@ public class SimulationEngine implements IEngine {
                 animals.add(animalToAdd);
         }
     }
+    public SimulationEngine(IWorldMap map, Vector2d[] animalsPositions) {
+        this.moves = new MoveDirection[0];
+        this.animals = new ArrayList<>();
+        for (Vector2d pos : animalsPositions) {
+            Animal animalToAdd = new Animal(map, pos);
+            if (map.place(animalToAdd))
+                animals.add(animalToAdd);
+        }
+
+    }
 
     @Override
     public void run() {

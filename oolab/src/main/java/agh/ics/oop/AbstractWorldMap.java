@@ -11,6 +11,13 @@ abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver{
     protected Vector2d leftBottomCorner;
     protected Vector2d rightTopCorner;
 
+    public Vector2d getLeftBottomCorner() {
+        return leftBottomCorner;
+    }
+
+    public Vector2d getRightTopCorner() {
+        return rightTopCorner;
+    }
 
     public AbstractWorldMap(int xLB, int yLB, int xRT, int yRT) {
         this.leftBottomCorner = new Vector2d(xLB, yLB);
@@ -26,7 +33,8 @@ abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver{
     }
 
     public boolean canMoveTo(Vector2d position) {
-        return position.precedes(rightTopCorner) && position.follows(leftBottomCorner) && !(objectAt(position) instanceof Animal);
+        return position.precedes(rightTopCorner) && position.follows(leftBottomCorner);
+//        return position.precedes(rightTopCorner) && position.follows(leftBottomCorner) && !(objectAt(position) instanceof Animal);
     }
 
     public boolean place(Animal animal) {
@@ -34,7 +42,7 @@ abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver{
             animals.put(animal.getPosition(), animal);
             return true;
         }
-        return false;
+        throw new IllegalArgumentException("Animal can't be palced at " + animal.getPosition() + " position");
     }
 
     public boolean isOccupied(Vector2d position) {
@@ -51,4 +59,6 @@ abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver{
         this.animals.remove(oldPosition);
         this.animals.put(newPosition, animalToChange);
     }
+
+
 }
