@@ -53,10 +53,10 @@ public class Animal extends AbstractWorldMapElement{
     }
 
     void addObserver(IPositionChangeObserver observer) {this.observers.put(observer, observer);
-    };
+    }
 
     void removeObserver(IPositionChangeObserver observer) {this.observers.remove(observer);
-    };
+    }
 
     void positionChanged(Vector2d newPosition) {
         for (IPositionChangeObserver observer: observers.values()) {
@@ -65,5 +65,14 @@ public class Animal extends AbstractWorldMapElement{
         this.position = newPosition;
     }
 
+    @Override
+    public String getImageName() {
+        return switch (this.direction) {
+            case NORTH -> "up.png";
+            case EAST -> "right.png";
+            case SOUTH -> "down.png";
+            case WEST -> "left.png";
+        };
+    }
 
 }

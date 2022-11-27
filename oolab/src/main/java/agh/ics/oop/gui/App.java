@@ -16,6 +16,8 @@ public class App extends Application{
     private SimulationEngine engine;
     private GrassField map;
 
+    private Vector2d[] positions;
+
     public void init() {
         this.map = new GrassField(10);
         Vector2d[] positions = {new Vector2d(-3, -6)};
@@ -47,11 +49,18 @@ public class App extends Application{
             }
         }
 
+        for(Animal animal: engine.getAnimals()) {
+            GuiElementBox box = new GuiElementBox(animal);
+            Vector2d pos = animal.getPosition();
+            grid.add(box.mapElementVbox(), pos.x + 1 + Math.abs(map.drawBottomLeft().x), pos.y + 1 + Math.abs(map.drawBottomLeft().y));
+        }
+
         for(Grass grass: map.getGrasses()) {
+            GuiElementBox box = new GuiElementBox(grass);
             Vector2d pos = grass.getPosition();
-            Label label = new Label("*");
-            grid.add(label, pos.x + 1 + Math.abs(map.drawBottomLeft().x), pos.y + 1 + Math.abs(map.drawBottomLeft().y));
-            GridPane.setHalignment(label, HPos.CENTER);
+//            Label label = new Label("*");
+            grid.add(box.mapElementVbox(), pos.x + 1 + Math.abs(map.drawBottomLeft().x), pos.y + 1 + Math.abs(map.drawBottomLeft().y));
+//            GridPane.setHalignment(label, HPos.CENTER);
         }
 
         Scene scene = new Scene(grid);

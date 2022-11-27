@@ -16,6 +16,11 @@ public class SimulationEngine implements IEngine {
                 animals.add(animalToAdd);
         }
     }
+
+    public List<Animal> getAnimals() {
+        return animals;
+    }
+
     public SimulationEngine(IWorldMap map, Vector2d[] animalsPositions) {
         this.moves = new MoveDirection[0];
         this.animals = new ArrayList<>();
