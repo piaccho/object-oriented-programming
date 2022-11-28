@@ -10,7 +10,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -27,18 +29,21 @@ public class App extends Application implements IObserver{
 
     public void init() {
         this.map = new GrassField(10);
-        Vector2d[] positions = {new Vector2d(-3, -6)};
+        Vector2d[] positions = {new Vector2d(1, 1)};
         this.engine = new SimulationEngine(map, positions);
         this.engine.addObserver(this);
         engine.setMoveDelay(300);
         grid = new GridPane();
     }
 
-    public void drawMap() {
+    public void drawMap(boolean initialGrid) {
 
+        grid.setGridLinesVisible(false);
         grid.setGridLinesVisible(true);
 
-        double boxSize = 40; // bok kwadratu w px
+        int boxSize = 40;
+
+
         for (int i = 0; i < map.drawTopRight().y - map.drawBottomLeft().y + 2; i++) {
             for (int j = 0; j < map.drawTopRight().x - map.drawBottomLeft().x + 2; j++) {
                 Label label;
@@ -52,9 +57,6 @@ public class App extends Application implements IObserver{
                     label = new Label("");
                 }
 
-                Rectangle r = new Rectangle(boxSize, boxSize, boxSize, boxSize);
-                r.setFill(Color.WHITE);
-                grid.add(r, j, i);
                 grid.add(label, j, i);
                 GridPane.setHalignment(label, HPos.CENTER);
             }
@@ -74,6 +76,12 @@ public class App extends Application implements IObserver{
             }
         } catch (FileNotFoundException exception) {
             System.out.println("Couldnt load files");
+        }
+        if (initialGrid) {
+            for (int i = 0; i <= map.drawTopRight().x - map.drawBottomLeft().x + 1; i++)
+                grid.getColumnConstraints().add(new ColumnConstraints(boxSize));
+            for (int j = 0; j <= map.drawTopRight().y - map.drawBottomLeft().y + 1; j++)
+                grid.getRowConstraints().add(new RowConstraints(boxSize));
         }
     }
 
@@ -96,8 +104,8 @@ public class App extends Application implements IObserver{
         });
 
 
-        drawMap();
-        Scene scene = new Scene(appBox, 400, 400);
+        drawMap(true);
+        Scene scene = new Scene(appBox, 800, 800);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -106,7 +114,7 @@ public class App extends Application implements IObserver{
     public void elementMoved() {
         Platform.runLater(() -> {
             grid.getChildren().clear();
-            drawMap();
+            drawMap(false);
         });
     }
 }
