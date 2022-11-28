@@ -8,26 +8,23 @@ import static java.lang.System.out;
 
 public class World {
 
-    public static void main(String[] args) {
-        Application.launch(App.class, args);
+    public static void main(String[] args) {Application.launch(App.class, args);}
 
-        try {
-            MoveDirection[] directions = new OptionsParser().parse(args);
-//            String[] testArgs = {"f", "b", "r"};
-//            MoveDirection[] directions = new OptionsParser().parse(testArgs);
-            GrassField map = new GrassField(10);
-            Vector2d[] positions = {new Vector2d(2,2), new Vector2d(3,4) };
-            IEngine engine = new SimulationEngine(directions, map, positions);
-            engine.run();
-            out.println(map);
-        }
-        catch(IllegalArgumentException exception) {
+//        try {
+//            MoveDirection[] directions = new OptionsParser().parse(args);
+////            String[] testArgs = {"f", "b", "r"};
+////            MoveDirection[] directions = new OptionsParser().parse(testArgs);
+//            GrassField map = new GrassField(10);
+//            Vector2d[] positions = {new Vector2d(2,2), new Vector2d(3,4) };
+//            IEngine engine = new SimulationEngine(directions, map, positions);
+//            engine.run();
+//            out.println(map);
+//        }
+//        catch(IllegalArgumentException exception) {
+//
+//            out.println("Exception:" + exception);
+//        }
 
-            out.println("Exception:" + exception);
-        }
-
-
-    }
 
     public static void run(Direction[] dirs) {
         for (Direction d : dirs) {
