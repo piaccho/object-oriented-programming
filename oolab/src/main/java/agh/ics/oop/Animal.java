@@ -68,9 +68,9 @@ public class Animal extends AbstractWorldMapElement{
     @Override
     public String getImageName() {
         return switch (this.direction) {
-            case NORTH -> "up.png";
+            case NORTH -> "down.png";
             case EAST -> "right.png";
-            case SOUTH -> "down.png";
+            case SOUTH -> "up.png";
             case WEST -> "left.png";
         };
     }
